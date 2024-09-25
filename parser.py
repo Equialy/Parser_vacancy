@@ -1,5 +1,3 @@
-import pprint
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -76,11 +74,12 @@ def extract_jobs(max_pages: int, url: str, job:str):
             'hhtmFromLabel': 'vacancy_search_line',
             'page': page  # Добавляем номер страницы
         }
-        # params['page'] = page #Номер страницы в параметр запроса
+
         result = requests.get(url, params=params, headers=headers)
         soup = BeautifulSoup(result.text, 'html.parser')
 
         vacancy = soup.find_all('div', {'class': 'magritte-redesign'})
+
         for result in vacancy:
             jobs.append(extract_jobs_dict(result))
     return jobs
