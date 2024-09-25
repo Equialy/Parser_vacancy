@@ -102,7 +102,7 @@ def extract_jobs(max_pages: int, url: str):
     for page in range(max_pages):
         pprint.pprint(f'Парсинг страницы {page}')
         params['page'] = page #Номер страницы в параметр запроса
-        result = requests.get(f'{url}&page={page}', headers=headers)
+        result = requests.get(url, params=params, headers=headers)
         soup = BeautifulSoup(result.text, 'html.parser')
 
         vacancy = soup.find_all('div', {'class': 'magritte-redesign'})
