@@ -25,7 +25,7 @@ def about():
         else:
             result = get_jobs(key_vacancy)
             data[key_vacancy] = result
-            print(result)
+
     else:
         return redirect('/')
     return render_template('find_vacations.html', vacancy=key_vacancy,
