@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JobScripter</title>
+    <style>
+        section{
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Найдено {{ count_result }} вакансий</h2>
+    <h3>Найденные вакансии по запросу {{ vacancy }}</h3>
+    <a href="/download?key_vacancy={{ vacancy }}">Ссылка на скачивание</a>
+    <section>
+        <h4>Название вакансии</h4>
+        <h4>Компания</h4>
+        <h4>Расположение</h4>
+        <h4>Ссылка</h4>
+        {% for vacancy in name_vacancy %}
+            <span>{{ vacancy.title }}</span>
+            <span>{{ vacancy.company }}</span>
+            <span>{{ vacancy.location }}</span>
+            <a href="{{vacancy.link}}" target="_blank">Открыть вакансию</a>
+        {% endfor %}
+    </section>
+</body>
+</html>
