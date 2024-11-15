@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, send_file
 
-from Parser_vacancy.parser import get_jobs
-from Parser_vacancy.download import save_csv_file
+from .parser import get_jobs
+from .download import save_csv_file
 
 app = Flask('JobScripter')
 
