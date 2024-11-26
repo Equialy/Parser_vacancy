@@ -1,7 +1,9 @@
+import asyncio
+
 from flask import Flask, render_template, request, redirect, send_file
 
-from scriptvacancy.parser import get_jobs
-from scriptvacancy.download import save_csv_file
+from Parser_vacancy.parser import GetJobs
+from Parser_vacancy.download import save_csv_file
 
 app = Flask('JobScripter')
 
@@ -23,7 +25,8 @@ def about():
             result = get_data
 
         else:
-            result = get_jobs(key_vacancy)
+            get_jobs_instance = GetJobs()
+            result =  get_jobs_instance.get_jobs(job=key_vacancy)
             data[key_vacancy] = result
 
     else:
