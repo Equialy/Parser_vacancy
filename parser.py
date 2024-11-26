@@ -1,8 +1,6 @@
-import aiohttp
 
 import requests
 from bs4 import BeautifulSoup
-
 
 from .params import headers
 
@@ -36,6 +34,8 @@ class RequestGet:
             links.append(1)  # Если пагинации нет, значит одна страница
 
         return links[-1]
+
+
 class ParsingData:
 
     def extract_jobs_dict(self, html) -> dict:
@@ -46,8 +46,7 @@ class ParsingData:
         location = html.find('span', {'data-qa': 'vacancy-serp__vacancy-address'}).text.partition(',')[0]
         return {'title': name_vacancy, 'company': company, 'location': location, 'link': link_vacany}
 
-
-    def extract_jobs(self, max_pages: int, url: str, job:str):
+    def extract_jobs(self, max_pages: int, url: str, job: str):
         jobs = []
         for page in range(max_pages):
             print(f'Парсинг страницы {page + 1} из {max_pages}')
@@ -71,12 +70,13 @@ class ParsingData:
                 jobs.append(self.extract_jobs_dict(result))
         return jobs
 
+
 class GetJobs(RequestGet, ParsingData):
 
-    def get_jobs(self, job: str)->list:
+    def get_jobs(self, job: str) -> list:
         """Получаем вакансии"""
         url = f'https://nn.hh.ru/search/vacancy'
-        max_page =  self.extract_parser(url, job)
+        max_page = self.extract_parser(url, job)
         print(f'Найдено {max_page} страниц')
         jobs = self.extract_jobs(max_page, url, job)
         return jobs

@@ -71,7 +71,7 @@ class ParsingData:
                 jobs.append(self.extract_jobs_dict(result))
         return jobs
 
-class GetJobs(RequestGet,ParsingData):
+class GetJobs(RequestGet, ParsingData):
 
     def get_jobs(self, job: str)->list:
         """Получаем вакансии"""
